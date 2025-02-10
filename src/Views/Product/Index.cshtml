@@ -1,0 +1,85 @@
+﻿@model IEnumerable<MyFirstMVC_ADO.Models.Product>
+
+@{
+    ViewBag.Title = "Product Master";
+}
+
+<h2>Product Master</h2>
+
+@if (TempData["infoMessage"] != null)
+{
+
+    <div class="alert alert-info">
+        <strong>Alert :</strong>@TempData["infoMessage"]
+
+
+    </div>
+}
+
+@if (TempData["Success"] != null)
+{
+
+    <div class="alert alert-success">
+        <strong>Success :</strong>@TempData["Success"]
+
+
+    </div>
+}
+
+
+@if (TempData["Error"] != null)
+{
+
+    <div class="alert alert-danger">
+        <strong>Error :</strong>@TempData["Error"]
+
+
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Add Product", "Create", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QTY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </th>
+        <th> Action </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QTY)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProductId }, new { @class = "btn btn-success" }) |
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductId }, new { @class = "btn btn-danger" })
+               
+            </td>
+        </tr>
+    }
+
+</table>
